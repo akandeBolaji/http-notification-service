@@ -7,6 +7,7 @@ Follow this steps to build locally:
 ```sh
 Clone project
 composer install
+cp .env.example .env
 php artisan migrate:fresh --seed
 php artisan queue:work
 ```
