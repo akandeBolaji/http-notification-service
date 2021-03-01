@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use App\Models\Topic;
+use Illuminate\Support\Facades\Event;
+use App\Events\MessagePublished;
 
 class PublishTopicTest extends TestCase
 {
@@ -37,12 +39,15 @@ class PublishTopicTest extends TestCase
 
     public function test_that_publish_endpoint_returns_success_response()
     {
+        Event::fake();
+
         $topic = $this->generate_topic();
         $response = $this->postJson('/api/v1/publish/'.$topic->value, [
             'msg' => "hello"
         ]);
-        $response
-            ->assertStatus(200);
+
+        Event::assertDispatched(MessagePublished::class);
+        $response->assertStatus(200);
     }
 
     protected function generate_topic()
