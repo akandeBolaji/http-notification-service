@@ -16,7 +16,6 @@ class CreateSubscriptionTest extends TestCase
     {
         $topic = $this->generate_topic();
         $response = $this->postJson('/api/v1/subscribe/'.$topic->value, []);
-        $response->dump();
         $response
             ->assertStatus(400)
             ->assertJson([
@@ -30,7 +29,6 @@ class CreateSubscriptionTest extends TestCase
         $response = $this->postJson('/api/v1/subscribe/'.$topic->value, [
             'url' => "testing"
         ]);
-        $response->dump();
         $response
             ->assertStatus(400)
             ->assertJson([
@@ -43,7 +41,6 @@ class CreateSubscriptionTest extends TestCase
         $response = $this->postJson('/api/v1/subscribe/hh', [
             'url' => "testing"
         ]);
-        $response->dump();
         $response
             ->assertStatus(400)
             ->assertJson([
@@ -69,8 +66,6 @@ class CreateSubscriptionTest extends TestCase
         $response = $this->postJson('/api/v1/subscribe/'.$topic->value, [
             'url' => "https://test.com"
         ]);
-
-        $response->dump();
         $response
             ->assertStatus(200)
             ->assertJson([

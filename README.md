@@ -21,3 +21,7 @@ php artisan queue:work
 ### Publish message to topic
 
 /api/v1/publish/{topic} <br/>
+
+## Tests
+
+`php artisan test`
